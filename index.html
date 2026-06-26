@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Omar Lotfy — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;--bg2:#0f0f0f;--bg3:#141414;--bg4:#1a1a1a;
+  --surface:#222;--surface2:#2a2a2a;
+  --text:#ffffff;--text2:#aaaaaa;--text3:#777777;--text4:#555555;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --radius:20px;--radius-sm:10px;--radius-xs:6px;
+  --shadow:0 20px 60px -15px rgba(0,0,0,0.6);
+  --transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+  --navy:#0F1B2D;--navy2:#16243E;--navy3:#1C2E4F;
+  --blood:#8B1A1A;--blood2:#B71C1C;--blood3:#D32F2F;--blood-glow:rgba(139,26,26,0.3);
+  --beige:#D4C5A9;--beige2:#C4B594;--gray:#8A8A8A;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:#fff;color:#000}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--text4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text3)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;transition:var(--transition)}
+nav.scrolled{background:rgba(10,10,10,0.92);backdrop-filter:blur(24px) saturate(1.2);border-bottom:1px solid var(--border);padding:.85rem 2.5rem}
+.nav-logo{font-size:1.3rem;font-weight:700;letter-spacing:-.03em;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:var(--text3);font-weight:400}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:.83rem;font-weight:500;color:var(--text3);transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--text);transition:width .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--blood2);color:#fff;padding:.5rem 1.3rem;border-radius:30px;font-weight:600;font-size:.8rem;transition:var(--transition);border:none;cursor:pointer}
+.nav-cta:hover{background:var(--blood);transform:scale(1.03);box-shadow:0 0 25px var(--blood-glow)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{width:24px;height:1.5px;background:var(--text);transition:var(--transition)}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;padding:0 2.5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.25) saturate(.3)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,1) 0%,rgba(10,10,10,0.6) 50%,rgba(10,10,10,0.85) 100%)}
+.hero-inner{max-width:1100px;width:100%;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr;gap:3.5rem;align-items:center}
+.hero-avatar{position:relative;flex-shrink:0}
+.hero-avatar img{width:130px;height:130px;border-radius:50%;object-fit:cover;object-position:25% 50%;border:2.5px solid rgba(255,255,255,0.15);box-shadow:0 0 60px rgba(255,255,255,0.06)}
+.hero-avatar .status{position:absolute;bottom:6px;right:6px;width:16px;height:16px;border-radius:50%;background:var(--blood2);border:3px solid var(--bg);animation:pulse 2s infinite}
+.hero-content{animation:fadeIn 1s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);background:var(--surface);border:1px solid var(--border);padding:.35rem 1rem;border-radius:30px;margin-bottom:1.2rem}
+.hero-tag .dot{width:5px;height:5px;border-radius:50%;background:var(--blood2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-content h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.05;letter-spacing:-.025em;margin-bottom:.7rem}
+.hero-content h1 .lt{color:var(--text3);font-weight:300}
+.hero-content .sub{font-size:1.05rem;color:var(--text2);font-weight:300;margin-bottom:1.8rem;max-width:560px;line-height:1.65}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:.65rem 1.5rem;border-radius:30px;font-size:.85rem;font-weight:500;transition:var(--transition);border:none;cursor:pointer}
+.btn-primary{background:var(--blood2);color:#fff}
+.btn-primary:hover{background:var(--blood);transform:translateY(-1px);box-shadow:0 0 30px var(--blood-glow)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border2)}
+.btn-outline:hover{background:var(--surface);border-color:var(--text3);transform:translateY(-1px)}
+.hero-bottom{margin-top:2.5rem;display:flex;gap:2.5rem}
+.hero-stat .num{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:600;display:block}
+.hero-stat .lbl{font-size:.72rem;color:var(--text3);letter-spacing:.02em}
+
+/* ===== SECTION ===== */
+.section{padding:6rem 2.5rem}
+.section-dark{background:var(--bg2)}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-head{margin-bottom:3.5rem}
+.section-tag{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:.6rem;display:flex;align-items:center;gap:8px}
+.section-tag::before{content:'';width:20px;height:1px;background:var(--text4)}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.5rem}
+.section-desc{color:var(--text2);max-width:540px;font-weight:300;font-size:.92rem}
+
+/* ===== CARDS ===== */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:3rem}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem 1.5rem;transition:var(--transition)}
+.service-card:hover{border-color:var(--text4);transform:translateY(-3px);box-shadow:var(--shadow)}
+.service-card .icon{font-size:1.5rem;margin-bottom:1rem;display:block}
+.service-card h3{font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+.service-card p{font-size:.8rem;color:var(--text3);line-height:1.65;font-weight:300}
+
+/* ===== CIRCULAR GALLERY ===== */
+.circular-gallery{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:3.5rem;justify-content:center}
+.circular-gallery .cg-item{width:95px;height:95px;border-radius:50%;overflow:hidden;border:2px solid var(--border);cursor:pointer;transition:var(--transition);position:relative;flex-shrink:0}
+.circular-gallery .cg-item:hover{transform:scale(1.08);border-color:var(--text3);box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+.circular-gallery .cg-item img{width:100%;height:100%;object-fit:cover;filter:grayscale(.4);transition:var(--transition)}
+.circular-gallery .cg-item:hover img{filter:grayscale(0)}
+.circular-gallery .cg-item .cg-label{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:.55rem;color:rgba(255,255,255,0.8);background:rgba(0,0,0,0.55);padding:2px 0;backdrop-filter:blur(4px);opacity:0;transition:var(--transition)}
+.circular-gallery .cg-item:hover .cg-label{opacity:1}
+
+/* ===== PROJECTS ===== */
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;transition:var(--transition)}
+.project-card:hover{border-color:var(--text4);box-shadow:var(--shadow)}
+.project-card-top{padding:1.5rem 1.5rem 1rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.8rem}
+.project-card .name{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600}
+.project-card .sub{font-size:.78rem;color:var(--text3);margin-top:4px}
+.project-card .type{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .85rem;border-radius:20px;white-space:nowrap}
+.type-seo{background:rgba(255,255,255,0.05);color:var(--text2);border:1px solid var(--border)}
+.type-web{background:rgba(255,255,255,0.05);color:var(--text2);border:1px solid var(--border)}
+.type-brand{background:rgba(255,255,255,0.05);color:var(--text2);border:1px solid var(--border)}
+.type-wip{background:rgba(255,255,255,0.05);color:var(--text2);border:1px solid var(--border)}
+.project-card .desc{font-size:.82rem;color:var(--text2);padding:0 1.5rem 1rem;line-height:1.7;font-weight:300}
+.project-card .wip{background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;margin:.2rem 1.5rem 1rem;font-size:.78rem;color:var(--text3);display:flex;align-items:center;gap:6px}
+.project-card .stats{display:flex;flex-wrap:wrap;gap:8px;padding:.9rem 1.5rem;border-top:1px solid var(--border);background:var(--bg3)}
+.stat-s{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;font-weight:500;color:var(--text2);background:var(--surface2);border:1px solid var(--border);padding:.3rem .85rem;border-radius:20px}
+
+/* ===== GALLERY ===== */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:3.5rem}
+.gallery-item{border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:var(--transition);background:var(--surface)}
+.gallery-item:hover{transform:translateY(-3px);border-color:var(--text4);box-shadow:var(--shadow)}
+.gallery-item img{width:100%;height:150px;object-fit:cover;display:block;filter:grayscale(.3)}
+.gallery-item:hover img{filter:grayscale(0)}
+.gallery-item .gl{border-top:1px solid var(--border);padding:.5rem .8rem;font-size:.75rem;font-weight:500;color:var(--text2)}
+
+/* ===== AI BLOCK ===== */
+.ai-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem 1.8rem;margin-bottom:3.5rem;transition:var(--transition)}
+.ai-block:hover{border-color:var(--text4)}
+.ai-block .ai-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:.3rem}
+.ai-block .ai-sub{font-size:.85rem;color:var(--text3);font-weight:300;margin-bottom:1.2rem}
+.ai-tags{display:flex;flex-wrap:wrap;gap:8px}
+.ai-tag{background:var(--bg4);border:1px solid var(--border);color:var(--text2);font-size:.75rem;padding:.3rem .9rem;border-radius:20px;font-weight:400}
+
+/* ===== SKILLS ===== */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:3.5rem}
+.skill-tag{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:.65rem 1rem;font-size:.8rem;font-weight:500;color:var(--text);display:flex;align-items:center;gap:7px;transition:var(--transition)}
+.skill-tag:hover{border-color:var(--text4);transform:translateY(-2px)}
+.skill-tag .sd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.skill-tag.wip{opacity:.6;border-style:dashed}
+
+/* ===== EXPERIENCE ===== */
+.exp-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:10px;transition:var(--transition)}
+.exp-block:hover{border-color:var(--text4)}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem}
+.exp-title{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600}
+.exp-company{font-size:.8rem;color:var(--text3);margin-top:2px}
+.exp-date{font-size:.7rem;font-weight:500;color:var(--text2);background:var(--bg4);padding:.2rem .85rem;border-radius:20px;border:1px solid var(--border);white-space:nowrap}
+.exp-list{list-style:none}
+.exp-list li{font-size:.8rem;color:var(--text2);padding:3px 0 3px 1.1rem;position:relative;line-height:1.65;font-weight:300}
+.exp-list li::before{content:'—';position:absolute;left:0;color:var(--text4);font-size:.7rem}
+
+/* ===== EDUCATION ===== */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:3.5rem}
+.lang-grid{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:3.5rem}
+.lang-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:.7rem 1.3rem;text-align:center;min-width:90px;transition:var(--transition)}
+.lang-card:hover{border-color:var(--text4);transform:translateY(-2px)}
+.lang-card .l-name{font-size:.85rem;font-weight:600}
+.lang-card .l-level{font-size:.7rem;color:var(--text3);margin-top:2px}
+
+/* ===== CONTACT ===== */
+.contact-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:3rem}
+.contact-btn{display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:.6rem 1.15rem;font-size:.8rem;font-weight:500;color:var(--text);transition:var(--transition)}
+.contact-btn:hover{background:var(--bg4);border-color:var(--text3);transform:translateY(-2px)}
+.contact-btn.primary{background:var(--blood2);color:#fff;border-color:var(--blood2)}
+.contact-btn.primary:hover{background:var(--blood);border-color:var(--blood)}
+
+/* ===== FLOATING WHATSAPP ===== */
+.whatsapp-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:var(--transition);text-decoration:none}
+.whatsapp-float:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,0.5)}
+@media(max-width:600px){.whatsapp-float{width:46px;height:46px;font-size:1.3rem;bottom:1rem;right:1rem}}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;backdrop-filter:blur(12px)}
+.lightbox.open{display:flex}
+.lightbox img{max-width:85vw;max-height:82vh;border-radius:var(--radius-sm)}
+.lightbox-close{position:absolute;top:1.2rem;right:1.2rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2}
+.lightbox-close:hover{background:rgba(255,255,255,0.15)}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2}
+.lightbox-nav:hover{background:rgba(255,255,255,0.15)}
+.lightbox-nav.ln{left:1.2rem}
+.lightbox-nav.rn{right:1.2rem}
+.lightbox-c{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.5);font-size:.8rem;z-index:2}
+.lightbox-ct{position:absolute;top:1.2rem;left:1.2rem;color:rgba(255,255,255,0.35);font-size:.75rem;z-index:2}
+
+/* ===== FOOTER ===== */
+.footer{padding:2.5rem;text-align:center;border-top:1px solid var(--border);font-size:.8rem;color:var(--text4);font-weight:300}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  nav{padding:1rem 1.2rem}
+  nav.scrolled{padding:.7rem 1.2rem}
+  .hero{padding:0 1.2rem}
+  .hero-inner{grid-template-columns:1fr;gap:2rem;text-align:center}
+  .hero-avatar{margin:0 auto}
+  .hero-avatar img{width:100px;height:100px}
+  .hero-content .sub{margin-left:auto;margin-right:auto}
+  .hero-btns{justify-content:center}
+  .hero-bottom{justify-content:center}
+  .cards-grid{grid-template-columns:1fr 1fr;max-width:500px;margin-left:auto;margin-right:auto}
+  .section{padding:4rem 1.2rem}
+  .section-title{font-size:1.5rem}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .lightbox-nav,.lightbox-close{width:36px;height:36px;font-size:1rem}
+}
+@media(max-width:600px){
+  .cards-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .hero-stat .num{font-size:1.2rem}
+  .hero-bottom{gap:1.5rem}
+  .contact-row{gap:8px}
+  .contact-btn{font-size:.75rem;padding:.5rem .9rem}
+}
+@media(max-width:600px){
+  .edu-highlight{padding:1.8rem}
+  .edu-highlight-inner{text-align:center;justify-content:center}
+  .edu-highlight-text{text-align:center}
+  .edu-highlight-text .eh-meta{justify-content:center}
+  .edu-highlight-icon{margin:0 auto}
+}
+
+/* ===== UNIVERSITY HIGHLIGHT ===== */
+.edu-highlight{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#1d2f4a 100%);border:1px solid rgba(212,197,169,0.15);border-radius:24px;padding:2.5rem;margin-bottom:3.5rem;position:relative;overflow:hidden}
+.edu-highlight::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(212,197,169,0.04);pointer-events:none}
+.edu-highlight::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:rgba(138,138,138,0.04);pointer-events:none}
+.edu-highlight-inner{position:relative;z-index:1;display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+.edu-highlight-icon{width:70px;height:70px;border-radius:50%;background:rgba(212,197,169,0.1);border:1.5px solid rgba(212,197,169,0.2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.edu-highlight-text{flex:1;min-width:200px}
+.edu-highlight-text .eh-label{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:.3rem}
+.edu-highlight-text .eh-title{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;color:var(--beige);margin-bottom:.15rem;line-height:1.3}
+.edu-highlight-text .eh-sub{font-size:.82rem;color:var(--gray);font-weight:300}
+.edu-highlight-text .eh-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:.8rem}
+.edu-highlight-text .eh-meta span{font-size:.7rem;background:rgba(212,197,169,0.1);border:1px solid rgba(212,197,169,0.15);color:var(--beige2);padding:.2rem .8rem;border-radius:20px}
+
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">OM<span>.</span></div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#work">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="window.open('https://www.linkedin.com/in/eng-omar-lotfy-684b35356','_blank')">LinkedIn</button>
+  <div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show');this.classList.toggle('active')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"><img src="IMG/BANAR.png" alt=""/></div>
+  <div class="hero-inner">
+    <div class="hero-avatar">
+      <img src="IMG/BANAR.png" alt="Omar Lotfy"/>
+      <span class="status"></span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag"><span class="dot"></span> Available for projects</div>
+      <h1>Omar <span class="lt">Lotfy</span></h1>
+      <p class="sub">Digital Marketer · SEO Specialist · Web Developer · AI-Powered Growth Expert. I build brands that dominate search, automate with AI, and convert visitors into revenue.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View my work →</a>
+        <a href="https://www.linkedin.com/in/eng-omar-lotfy-684b35356" target="_blank" class="btn btn-outline">LinkedIn Profile</a>
+      </div>
+      <div class="hero-bottom">
+        <div class="hero-stat"><span class="num">3+</span><span class="lbl">Years Experience</span></div>
+        <div class="hero-stat"><span class="num">200+</span><span class="lbl">Backlinks Built</span></div>
+        <div class="hero-stat"><span class="num">5</span><span class="lbl">Projects Launched</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIVERSITY HIGHLIGHT -->
+<section class="section" style="padding:2rem 2.5rem">
+  <div class="section-inner">
+    <div class="edu-highlight">
+      <div class="edu-highlight-inner">
+        <div class="edu-highlight-icon">🎓</div>
+        <div class="edu-highlight-text">
+          <div class="eh-label">Current Education</div>
+          <div class="eh-title">New Mansoura University, Egypt</div>
+          <div class="eh-sub">B.Sc. in Anesthesia, Intensive Care & Biomedical Equipment Engineering</div>
+          <div class="eh-meta">
+            <span>تخدير وعناية مركزة</span>
+            <span>هندسة الأجهزة الطبية</span>
+            <span>Class of 2028</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag">Expertise</div>
+      <h2 class="section-title">What I do</h2>
+      <p class="section-desc">Full-spectrum digital marketing, web development, and AI automation for modern businesses.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="service-card"><span class="icon">🔗</span><h3>SEO & Link Building</h3><p>Off-page SEO strategies, backlink campaigns, and Google AI Overviews inclusion for top rankings.</p></div>
+      <div class="service-card"><span class="icon">⚙️</span><h3>AI & Automation</h3><p>Custom AI workflows reducing manual overhead by 50% across business operations.</p></div>
+      <div class="service-card"><span class="icon">💻</span><h3>Web Development</h3><p>Full-stack websites from design to deployment — Arabic RTL, auth systems, dashboards.</p></div>
+      <div class="service-card"><span class="icon">🛒</span><h3>E-Commerce & FBA</h3><p>Amazon FBA operations, store optimization, and brand scaling for global markets.</p></div>
+      <div class="service-card"><span class="icon">🗄️</span><h3>Odoo ERP</h3><p>Full ERP configuration and management for diverse business models.</p></div>
+      <div class="service-card"><span class="icon">📊</span><h3>Digital Marketing</h3><p>Data-backed strategies, paid media, and growth campaigns across platforms.</p></div>
+      <div class="service-card"><span class="icon">📱</span><h3>Social Ads (Facebook & TikTok)</h3><p>Paid ad campaigns with funded/sponsored budgets — precise targeting and full funnel management.</p></div>
+    </div>
+
+    <div class="section-head" style="margin-top:2rem">
+      <div class="section-tag">AI</div>
+      <h2 class="section-title">AI workflow</h2>
+    </div>
+    <div class="ai-block">
+      <div class="ai-title">AI-Powered Work — Everyday Practice</div>
+      <div class="ai-sub">Using AI tools to accelerate every task: content, automation, research, code, and strategy.</div>
+      <div class="ai-tags">
+        <span class="ai-tag">ChatGPT / Claude</span>
+        <span class="ai-tag">AI Content Generation</span>
+        <span class="ai-tag">Prompt Engineering</span>
+        <span class="ai-tag">Workflow Automation</span>
+        <span class="ai-tag">AI SEO Tools</span>
+        <span class="ai-tag">Process Optimization</span>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <div class="section-tag">Skills</div>
+      <h2 class="section-title">Technologies & tools</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>SEO & Backlinks</div>
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>Web Development</div>
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>AI Automation</div>
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>Amazon FBA</div>
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>Odoo ERP</div>
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>UI/UX Design</div>
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>E-Commerce Ops</div>
+      <div class="skill-tag wip"><span class="sd" style="background:#555"></span>Media Buying</div>
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>Facebook Ads</div>
+      <div class="skill-tag"><span class="sd" style="background:#999"></span>TikTok Ads</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="projects">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag">Portfolio</div>
+      <h2 class="section-title">Selected projects</h2>
+      <p class="section-desc">Real work for real clients — from fitness platforms to e-commerce growth.</p>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <div><div class="name">الفورمه — Al-Forma Fitness Platform</div><div class="sub">Sports Coaching & Training Platform · Full Build for Client</div></div>
+        <span class="type type-wip">Launching Jul 7</span>
+      </div>
+      <div class="desc">Built a complete Arabic sports coaching platform from scratch for a professional fitness coach. Includes a full landing page, client contact system, member login portal, training dashboard, nutrition section, and package pricing — all custom designed and developed solo.</div>
+      <div class="wip">🚀 Launching July 7, 2025 — Full SEO campaign planned post-launch</div>
+      <div class="stats">
+        <span class="stat-s">🎨 Full UI Design</span>
+        <span class="stat-s">💻 Full Development</span>
+        <span class="stat-s">📱 Responsive</span>
+        <span class="stat-s">🔐 Auth System</span>
+        <span class="stat-s">🇸🇦 Arabic RTL</span>
+        <span class="stat-s">📊 Dashboard</span>
+      </div>
+    </div>
+
+    <div class="circular-gallery">
+      <div class="cg-item" onclick="openLB(0)"><img src="IMG/OMAR1.png" alt="Hero"/><span class="cg-label">Hero</span></div>
+      <div class="cg-item" onclick="openLB(1)"><img src="IMG/OMAR2.png" alt="About"/><span class="cg-label">About</span></div>
+      <div class="cg-item" onclick="openLB(2)"><img src="IMG/OMAR3.png" alt="Steps"/><span class="cg-label">Steps</span></div>
+      <div class="cg-item" onclick="openLB(3)"><img src="IMG/OMAR4.png" alt="Pricing"/><span class="cg-label">Pricing</span></div>
+      <div class="cg-item" onclick="openLB(4)"><img src="IMG/OMAR5.png" alt="Calculator"/><span class="cg-label">Calculator</span></div>
+      <div class="cg-item" onclick="openLB(5)"><img src="IMG/OMAR6.png" alt="Contact"/><span class="cg-label">Contact</span></div>
+      <div class="cg-item" onclick="openLB(6)"><img src="IMG/OMAR7.png" alt="Login"/><span class="cg-label">Login</span></div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <div><div class="name"><a href="https://cairovolt.com" target="_blank" style="text-decoration:none;color:inherit">Cairo Volt ↗</a></div><div class="sub">Mobile Accessories E-commerce · Egypt</div></div>
+        <span class="type type-seo">SEO / Off-Page</span>
+      </div>
+      <div class="desc">Built a full off-page SEO strategy for <a href="https://cairovolt.com" target="_blank" style="color:#aaa;text-decoration:underline">cairovolt.com</a>. Executed a structured backlink campaign that pushed the site into Google's first pages and earned inclusion in Google AI Overviews — a strong signal of domain authority and content trust.</div>
+      <div class="stats">
+        <span class="stat-s">🔗 200+ Backlinks</span>
+        <span class="stat-s">🤖 Google AI Overviews</span>
+        <span class="stat-s">📈 Page 1 Google</span>
+        <span class="stat-s">📅 4 Months</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <div><div class="name">Devv — E-Commerce Operations</div><div class="sub">Marketing & E-Commerce Company · 2022–Present</div></div>
+        <span class="type type-web">Full-Stack Marketing</span>
+      </div>
+      <div class="desc">End-to-end digital marketing and web operations: Amazon FBA management, SEO strategy, web application development, and AI automation workflows that cut manual work by 50%.</div>
+      <div class="stats">
+        <span class="stat-s">⚙️ 50% Less Manual Work</span>
+        <span class="stat-s">🛒 Amazon FBA</span>
+        <span class="stat-s">🌐 Web Apps</span>
+        <span class="stat-s">📅 3+ Years</span>
+      </div>
+    </div>
+
+    <div class="project-card" style="margin-bottom:3.5rem">
+      <div class="project-card-top">
+        <div><div class="name">Fixora</div><div class="sub">Home Services Platform · New Damietta, Egypt</div></div>
+        <span class="type type-brand">Founder</span>
+      </div>
+      <div class="desc">Founded and built Fixora from scratch — a home services platform connecting customers with vetted technicians in Damietta New City. Designed the brand, MVP landing page, and WhatsApp-integrated booking flow.</div>
+      <div class="stats">
+        <span class="stat-s">🚀 MVP Live</span>
+        <span class="stat-s">📱 WhatsApp Integration</span>
+        <span class="stat-s">💡 Founder</span>
+      </div>
+    </div>
+
+    <div class="circular-gallery" style="margin-bottom:3.5rem">
+      <div class="cg-item" onclick="openLB(7)"><img src="IMG/fixora.png" alt="Fixora"/><span class="cg-label">Fixora</span></div>
+      <div class="cg-item" onclick="openLB(8)"><img src="IMG/fixora1.png" alt="Fixora"/><span class="cg-label">Fixora</span></div>
+    </div>
+
+    <div class="project-card" style="margin-bottom:1rem">
+      <div class="project-card-top">
+        <div><div class="name">العراقي — Clothing Store System</div><div class="sub">Cashier & Inventory System · Retail, Egypt</div></div>
+        <span class="type type-web">Cashier System</span>
+      </div>
+      <div class="desc">Built a complete cashier and inventory management system for a clothing store. Includes sales tracking, inventory management, daily reports, customer database, and easy-to-use interface for staff.</div>
+      <div class="stats">
+        <span class="stat-s">💻 Full System</span>
+        <span class="stat-s">📦 Inventory Mgmt</span>
+        <span class="stat-s">📊 Sales Reports</span>
+        <span class="stat-s">👥 Customer DB</span>
+      </div>
+    </div>
+
+    <div class="circular-gallery" style="margin-bottom:3.5rem">
+      <div class="cg-item" onclick="openLB(9)"><img src="IMG/ar1.png" alt="العراقي"/><span class="cg-label">System</span></div>
+      <div class="cg-item" onclick="openLB(10)"><img src="IMG/ar2.png" alt="العراقي"/><span class="cg-label">Dashboard</span></div>
+      <div class="cg-item" onclick="openLB(11)"><img src="IMG/ar3.png" alt="العراقي"/><span class="cg-label">Reports</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag">Career</div>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <div class="exp-block">
+      <div class="exp-top">
+        <div><div class="exp-title">E-Commerce & Web Development Lead</div><div class="exp-company">Devv Marketing & E-commerce Company</div></div>
+        <div class="exp-date">2022 – Present</div>
+      </div>
+      <ul class="exp-list">
+        <li>Managed end-to-end Amazon FBA operations — supply chain, store optimization, brand visibility</li>
+        <li>Built and deployed scalable web applications focused on conversion and performance</li>
+        <li>Engineered SEO strategies securing top organic rankings across multiple projects</li>
+        <li>Developed AI automation workflows reducing manual overhead by 50%</li>
+        <li>Managed sales initiatives and key client partnerships</li>
+      </ul>
+    </div>
+    <div class="exp-block" style="margin-bottom:3rem">
+      <div class="exp-top">
+        <div><div class="exp-title">SEO Specialist — Off-Page</div><div class="exp-company"><a href="https://cairovolt.com" target="_blank" style="color:var(--text3);text-decoration:none">Cairo Volt ↗</a> (Freelance)</div></div>
+        <div class="exp-date">4 Months</div>
+      </div>
+      <ul class="exp-list">
+        <li>Built 200+ quality backlinks driving Page 1 Google rankings</li>
+        <li>Achieved Google AI Overviews inclusion — indicator of high domain authority</li>
+      </ul>
+    </div>
+
+    <div class="section-head">
+      <div class="section-tag">Education</div>
+      <h2 class="section-title">Academic background</h2>
+    </div>
+    <div class="edu-navy">
+      <div class="ed-title">B.Sc. in Anesthesia, Intensive Care & Biomedical Equipment Engineering</div>
+      <div class="ed-uni">جامعة المنصورة الجديدة — New Mansoura University, Egypt</div>
+      <span class="ed-badge">Expected 2028</span>
+      <div class="ed-sub">تخدير وعناية مركزة · هندسة الأجهزة الطبية</div>
+    </div>
+    <div class="edu-navy" style="margin-bottom:3rem">
+      <div class="ed-title">Continuing Education</div>
+      <div class="ed-uni">Udemy · Coursera · Google Career Certificates</div>
+      <span class="ed-badge">Ongoing</span>
+      <div class="ed-sub">Digital Marketing · SEO · E-Commerce · AI Automation</div>
+    </div>
+    <div class="edu-navy" style="margin-bottom:3rem">
+      <div class="ed-title">Amazon FBA — Professional Course</div>
+      <div class="ed-uni">Instructor: Abdullah Hesham — Amazon E-Commerce Expert & Content Creator</div>
+      <span class="ed-badge">Completed</span>
+    </div>
+
+    <div class="section-head">
+      <div class="section-tag">Languages</div>
+    </div>
+    <div class="lang-grid">
+      <div class="lang-card"><div class="l-name">Arabic</div><div class="l-level">Native</div></div>
+      <div class="lang-card"><div class="l-name">English</div><div class="l-level">Professional</div></div>
+      <div class="lang-card"><div class="l-name">French</div><div class="l-level">Basic</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="contact">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-tag">Connect</div>
+      <h2 class="section-title">Let's work together</h2>
+      <p class="section-desc">Available for projects, collaborations, and consulting. Reach out anytime.</p>
+    </div>
+    <div class="contact-row">
+      <a href="tel:+201006528489" class="contact-btn">📞 +20 100 652 8489</a>
+      <a href="tel:+201552866544" class="contact-btn">📞 015 528 66544</a>
+      <a href="mailto:rfthmzh8@gmail.com" class="contact-btn">✉️ rfthmzh8@gmail.com</a>
+      <a href="https://wa.me/201006528489" target="_blank" class="contact-btn">💬 WhatsApp</a>
+      <a href="https://www.linkedin.com/in/eng-omar-lotfy-684b35356" target="_blank" class="contact-btn primary">💼 LinkedIn Profile</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">Omar Lotfy · Marketing & Web · 2025</footer>
+
+<a href="https://wa.me/201006528489" target="_blank" class="whatsapp-float" aria-label="WhatsApp">💬</a>
+
+<div class="lightbox" id="lb">
+  <button class="lightbox-close" onclick="closeLB()">✕</button>
+  <button class="lightbox-nav rn" onclick="navLB(1)">›</button>
+  <button class="lightbox-nav ln" onclick="navLB(-1)">‹</button>
+  <img id="lbImg" src="" alt=""/>
+  <div class="lightbox-ct" id="lbCt"></div>
+  <div class="lightbox-c" id="lbCap"></div>
+</div>
+
+<script>
+// nav scroll
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40));
+
+// lightbox
+const gi=[
+  {s:'IMG/OMAR1.png',c:'Hero Section — الرئيسية'},
+  {s:'IMG/OMAR2.png',c:'About the Coach — عن الكابتن'},
+  {s:'IMG/OMAR3.png',c:'How It Works — كيف يعمل البرنامج'},
+  {s:'IMG/OMAR4.png',c:'Pricing Plans — الباقات'},
+  {s:'IMG/OMAR5.png',c:'Calorie Calculator — حاسبة السعرات'},
+  {s:'IMG/OMAR6.png',c:'Contact Form — تواصل معنا'},
+  {s:'IMG/OMAR7.png',c:'Login Page — تسجيل الدخول'},
+  {s:'IMG/fixora.png',c:'Fixora — Home Services Platform'},
+  {s:'IMG/fixora1.png',c:'Fixora — Dashboard'},
+  {s:'IMG/ar1.png',c:'العراقي — Cashier System'},
+  {s:'IMG/ar2.png',c:'العراقي — Dashboard'},
+  {s:'IMG/ar3.png',c:'العراقي — Reports'}
+];
+let ci=0;
+function openLB(i){ci=i;upLB();document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+function navLB(d){ci=(ci+d+gi.length)%gi.length;upLB()}
+function upLB(){document.getElementById('lbImg').src=gi[ci].s;document.getElementById('lbCap').textContent=gi[ci].c;document.getElementById('lbCt').textContent=(ci+1)+'/'+gi.length}
+document.addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('open'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')navLB(1);if(e.key==='ArrowRight')navLB(-1)});
+</script>
+</body>
+</html>
